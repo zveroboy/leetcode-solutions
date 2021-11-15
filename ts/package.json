@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch --no-cache"
+    "test:watch": "jest --watch --no-cache 000141"
   },
   "dependencies": {
   },
