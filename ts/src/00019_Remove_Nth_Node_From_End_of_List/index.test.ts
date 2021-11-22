@@ -6,8 +6,6 @@ describe('should solve', () => {
     const ssl = fromArray([1, 2, 3, 4, 5])
     const sol = solution(ssl, 2)
     expect(sol).not.toBeNull()
-
-    console.log(toArray(sol!))
     expect(toArray(sol!)).toEqual([1, 2, 3, 5])
   })
 
@@ -15,8 +13,6 @@ describe('should solve', () => {
     const ssl = fromArray([1, 2])
     const sol = solution(ssl, 1)
     expect(sol).not.toBeNull()
-
-    console.log(toArray(sol!))
     expect(toArray(sol!)).toEqual([1])
   })
 
@@ -24,15 +20,12 @@ describe('should solve', () => {
     const ssl = fromArray([1, 2])
     const sol = solution(ssl, 2)
     expect(sol).not.toBeNull()
-
-    console.log(toArray(sol!))
     expect(toArray(sol!)).toEqual([2])
   })
 
   it('case 4', () => {
     const ssl = fromArray([1])
     const sol = solution(ssl, 1)
-
     expect(toArray(sol!)).toEqual([])
   })
 })
