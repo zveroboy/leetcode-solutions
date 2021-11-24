@@ -4,25 +4,18 @@ export default function (arr: number[]): boolean {
     return false
   }
 
-  let left = -Infinity
-  for (let l = 0; l < len - 1; l++) {
-    const diff = arr[l + 1] - arr[l]
+  let acc = 0
+  for (let l = 1; l < len; l++) {
+    const next = arr[l]
+    const prev = arr[l - 1]
+    const diff = next - prev
 
-    if (diff < 1) {
-      left = l
-      break
+    if ((acc === 0 && diff < 0) || diff === 0 || (acc < 0 && diff > 0)) {
+      return false
     }
+
+    acc = diff
   }
 
-  let right = Infinity
-  for (let r = len - 1; r > 0; r--) {
-    const diff = arr[r - 1] - arr[r]
-
-    if (diff < 1) {
-      right = r
-      break
-    }
-  }
-
-  return left === right
+  return acc < 0
 }
