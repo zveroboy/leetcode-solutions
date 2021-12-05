@@ -1,4 +1,4 @@
-import { ListNode, toGenerator } from '../data/ListNode'
+import { ListNode } from '../data/ListNode'
 
 export default function (head: ListNode | null): boolean {
   let slow: ListNode | null = head
