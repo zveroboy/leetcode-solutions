@@ -1,5 +1,4 @@
 import solution from '.'
-import { fromArray, toArray } from '../data/ListNode'
 
 describe('should solve', () => {
   it('case 1', () => {
