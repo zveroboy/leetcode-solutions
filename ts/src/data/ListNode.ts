@@ -20,8 +20,8 @@ export const fromArray = (arr: number[]): ListNode | null => {
   return head
 }
 
-export const toArray = (head: ListNode): number[] =>
-  [...toGenerator(head)].map((node) => node.val)
+export const toArray = (head: ListNode | null): number[] =>
+  head ? [...toGenerator(head)].map((node) => node.val) : []
 
 export const createCycle = (arr: number[], pos: number): ListNode | null => {
   const head = fromArray(arr)
