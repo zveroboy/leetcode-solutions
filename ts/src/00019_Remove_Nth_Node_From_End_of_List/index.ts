@@ -1,8 +1,11 @@
 import { ListNode } from '../data/ListNode'
 
-export default function (head: ListNode | null, n: number): ListNode | null {
-  let first: ListNode | null = head
-  let last: ListNode | null = null
+export default function <T = number>(
+  head: ListNode<T> | null,
+  n: number,
+): ListNode<T> | null {
+  let first: ListNode<T> | null = head
+  let last: ListNode<T> | null = null
 
   while (first?.next) {
     if (--n === 0) {

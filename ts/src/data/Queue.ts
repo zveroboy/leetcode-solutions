@@ -2,8 +2,8 @@ import { ListNode } from './ListNode'
 
 export class Queue {
   public limit
-  head: ListNode | null = null
-  tail: ListNode | null = null
+  head: ListNode<number> | null = null
+  tail: ListNode<number> | null = null
   constructor(k: number) {
     this.limit = k
   }
@@ -21,7 +21,7 @@ export class Queue {
       return false
     }
 
-    let node: ListNode | null = null
+    let node: ListNode<number> | null = null
     if (!this.head) {
       node = new ListNode(value)
       this.head = node

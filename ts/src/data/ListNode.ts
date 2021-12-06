@@ -1,11 +1,11 @@
-export class ListNode {
-  constructor(public val: number = 0, public next: ListNode | null = null) {}
+export class ListNode<T> {
+  constructor(public val: T, public next: ListNode<T> | null = null) {}
 }
 
-export const fromArray = (arr: number[]): ListNode | null => {
-  let head: ListNode | null = null
+export const fromArray = <T>(arr: T[]): ListNode<T> | null => {
+  let head: ListNode<T> | null = null
 
-  for (let cur: ListNode | undefined, i = 0; i < arr.length; i++) {
+  for (let cur: ListNode<T> | undefined, i = 0; i < arr.length; i++) {
     const node = new ListNode(arr[i])
 
     if (!cur) {
@@ -20,17 +20,20 @@ export const fromArray = (arr: number[]): ListNode | null => {
   return head
 }
 
-export const toArray = (head: ListNode | null): number[] =>
+export const toArray = <T>(head: ListNode<T> | null): T[] =>
   head ? [...toGenerator(head)].map((node) => node.val) : []
 
-export const createCycle = (arr: number[], pos: number): ListNode | null => {
+export const createCycle = (
+  arr: number[],
+  pos: number,
+): ListNode<number> | null => {
   const head = fromArray(arr)
 
   if (!head || pos < 0) {
     return head
   }
 
-  let entryNode: ListNode | undefined
+  let entryNode: ListNode<number> | undefined
   for (let cur = head, i = 0; ; i++) {
     if (i === pos) {
       entryNode = cur
@@ -52,7 +55,7 @@ export const createCycle = (arr: number[], pos: number): ListNode | null => {
   return head
 }
 
-type Intersected = [ListNode, ListNode]
+type Intersected<T> = [ListNode<T>, ListNode<T>]
 
 export const createIntersected = (
   intersectVal: number,
@@ -60,7 +63,7 @@ export const createIntersected = (
   listB: number[],
   skipA: number,
   skipB: number,
-): Intersected => {
+): Intersected<number> => {
   if (!listA.length || !listB.length) {
     throw new Error('Empty input array')
   }
@@ -78,7 +81,7 @@ export const createIntersected = (
       throw new Error('Broken list')
     }
 
-    return heads as Intersected
+    return heads as Intersected<number>
   }
 
   if (JSON.stringify(sharedA) !== JSON.stringify(sharedB)) {
@@ -95,7 +98,7 @@ export const createIntersected = (
     throw new Error('Broken shared list')
   }
 
-  const result: [ListNode, ListNode] = [shared, shared]
+  const result: [ListNode<number>, ListNode<number>] = [shared, shared]
 
   if (!shared) {
     throw new Error('Broken shared list')
@@ -124,8 +127,8 @@ export const createIntersected = (
   return result
 }
 
-export function* toGenerator(head: ListNode): Generator<ListNode> {
-  for (let cur: ListNode | null = head; cur; cur = cur.next) {
+export function* toGenerator<T>(head: ListNode<T>): Generator<ListNode<T>> {
+  for (let cur: ListNode<T> | null = head; cur; cur = cur.next) {
     yield cur
   }
 }

@@ -1,8 +1,8 @@
 import { ListNode } from '../data/ListNode'
 
-export default function (head: ListNode | null): boolean {
-  let slow: ListNode | null = head
-  let fast: ListNode | null = head
+export default function <T = number>(head: ListNode<T> | null): boolean {
+  let slow: ListNode<T> | null = head
+  let fast: ListNode<T> | null = head
   while (fast?.next?.next) {
     fast = fast.next?.next ?? null
     slow = slow?.next ?? null

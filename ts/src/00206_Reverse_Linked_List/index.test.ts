@@ -1,7 +1,7 @@
 import { defaultSolution, recursionSolution, ReverseLinkedList } from '.'
 import { fromArray, toArray } from '../data/ListNode'
 
-const cases = (solutionFn: ReverseLinkedList) => {
+const cases = (solutionFn: ReverseLinkedList<number>) => {
   const testCase = (inp: number[], exp: number[]) => () => {
     const ssl = fromArray(inp)
     const sol = solutionFn(ssl)

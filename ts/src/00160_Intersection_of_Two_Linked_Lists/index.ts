@@ -1,18 +1,18 @@
 import { ListNode, toGenerator } from '../data/ListNode'
 
-export default function (
-  headA: ListNode | null,
-  headB: ListNode | null,
-): ListNode | null {
+export default function <T = number>(
+  headA: ListNode<T> | null,
+  headB: ListNode<T> | null,
+): ListNode<T> | null {
   if (!headA || !headB) {
     return null
   }
 
   let lengthA = [...toGenerator(headA)].length
-  let runnerA: ListNode | null = headA
+  let runnerA: ListNode<T> | null = headA
 
   let lengthB = [...toGenerator(headB)].length
-  let runnerB: ListNode | null = headB
+  let runnerB: ListNode<T> | null = headB
 
   while (lengthA !== lengthB) {
     if (runnerA.next && lengthA > lengthB) {
