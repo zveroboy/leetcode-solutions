@@ -1,4 +1,4 @@
-export { Queue as MyCircularQueue } from '../data/Queue'
+export { QueueNumber as MyCircularQueue } from '../data/Queue'
 
 /**
  * Your MyCircularQueue object will be instantiated and called as such:

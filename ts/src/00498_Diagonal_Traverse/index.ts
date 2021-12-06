@@ -1,6 +1,5 @@
-type Matrix = number[][]
+import { Matrix, getSize } from '../data/Matrix'
 
-const getSize = (mat: Matrix) => [mat.length, mat.at(0)?.length ?? 0]
 const getDiagRows = (mat: Matrix) => {
   const [h, w] = getSize(mat)
   const max = Math.max(w, h)

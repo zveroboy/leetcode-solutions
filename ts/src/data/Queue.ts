@@ -1,9 +1,9 @@
 import { ListNode } from './ListNode'
 
-export class Queue {
+export class Queue<T> {
   public limit
-  head: ListNode<number> | null = null
-  tail: ListNode<number> | null = null
+  head: ListNode<T> | null = null
+  tail: ListNode<T> | null = null
   constructor(k: number) {
     this.limit = k
   }
@@ -16,12 +16,12 @@ export class Queue {
     }
   }
 
-  enQueue(value: number): boolean {
+  enQueue(value: T): boolean {
     if (this.isFull()) {
       return false
     }
 
-    let node: ListNode<number> | null = null
+    let node: ListNode<T> | null = null
     if (!this.head) {
       node = new ListNode(value)
       this.head = node
@@ -50,12 +50,12 @@ export class Queue {
     return true
   }
 
-  Front(): number {
-    return this.head?.val ?? -1
+  Front(): T | undefined {
+    return this.head?.val
   }
 
-  Rear(): number {
-    return this.tail?.val ?? -1
+  Rear(): T | undefined {
+    return this.tail?.val
   }
 
   isEmpty(): boolean {
@@ -68,5 +68,15 @@ export class Queue {
 
   length(): number {
     return [...this].length
+  }
+}
+
+export class QueueNumber extends Queue<number> {
+  Front(): number {
+    return super.Front() ?? -1
+  }
+
+  Rear(): number {
+    return super.Rear() ?? -1
   }
 }

@@ -1,1 +1,1 @@
-export const INF = 2 ** 23 - 1
+export const INF = 2 ** 31 - 1

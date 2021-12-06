@@ -1,9 +1,9 @@
-import { Queue } from '../data/Queue'
+import { QueueNumber } from '../data/Queue'
 
 export class MovingAverage {
-  #queue: Queue
+  #queue: QueueNumber
   constructor(size: number) {
-    this.#queue = new Queue(size)
+    this.#queue = new QueueNumber(size)
   }
 
   next(val: number): number {
