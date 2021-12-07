@@ -1,12 +1,14 @@
-export class ListNode<T> {
-  constructor(public val: T, public next: ListNode<T> | null = null) {}
+export class ListNodeBase<T> {
+  constructor(public val: T, public next: ListNodeBase<T> | null = null) {}
 }
 
-export const fromArray = <T>(arr: T[]): ListNode<T> | null => {
-  let head: ListNode<T> | null = null
+export class ListNode extends ListNodeBase<number> {}
 
-  for (let cur: ListNode<T> | undefined, i = 0; i < arr.length; i++) {
-    const node = new ListNode(arr[i])
+export const fromArray = <T>(arr: T[]): ListNodeBase<T> | null => {
+  let head: ListNodeBase<T> | null = null
+
+  for (let cur: ListNodeBase<T> | undefined, i = 0; i < arr.length; i++) {
+    const node = new ListNodeBase(arr[i])
 
     if (!cur) {
       head = node
@@ -20,20 +22,17 @@ export const fromArray = <T>(arr: T[]): ListNode<T> | null => {
   return head
 }
 
-export const toArray = <T>(head: ListNode<T> | null): T[] =>
+export const toArray = <T>(head: ListNodeBase<T> | null): T[] =>
   head ? [...toGenerator(head)].map((node) => node.val) : []
 
-export const createCycle = (
-  arr: number[],
-  pos: number,
-): ListNode<number> | null => {
+export const createCycle = (arr: number[], pos: number): ListNode | null => {
   const head = fromArray(arr)
 
   if (!head || pos < 0) {
     return head
   }
 
-  let entryNode: ListNode<number> | undefined
+  let entryNode: ListNode | undefined
   for (let cur = head, i = 0; ; i++) {
     if (i === pos) {
       entryNode = cur
@@ -55,7 +54,7 @@ export const createCycle = (
   return head
 }
 
-type Intersected<T> = [ListNode<T>, ListNode<T>]
+type Intersected<T> = [ListNodeBase<T>, ListNodeBase<T>]
 
 export const createIntersected = (
   intersectVal: number,
@@ -98,7 +97,7 @@ export const createIntersected = (
     throw new Error('Broken shared list')
   }
 
-  const result: [ListNode<number>, ListNode<number>] = [shared, shared]
+  const result: [ListNode, ListNode] = [shared, shared]
 
   if (!shared) {
     throw new Error('Broken shared list')
@@ -127,8 +126,10 @@ export const createIntersected = (
   return result
 }
 
-export function* toGenerator<T>(head: ListNode<T>): Generator<ListNode<T>> {
-  for (let cur: ListNode<T> | null = head; cur; cur = cur.next) {
+export function* toGenerator<T>(
+  head: ListNodeBase<T>,
+): Generator<ListNodeBase<T>> {
+  for (let cur: ListNodeBase<T> | null = head; cur; cur = cur.next) {
     yield cur
   }
 }

@@ -1,9 +1,9 @@
-import { ListNode } from './ListNode'
+import { ListNodeBase } from './ListNode'
 
 export class Queue<T> {
   public limit
-  head: ListNode<T> | null = null
-  tail: ListNode<T> | null = null
+  head: ListNodeBase<T> | null = null
+  tail: ListNodeBase<T> | null = null
   constructor(k: number) {
     this.limit = k
   }
@@ -21,9 +21,9 @@ export class Queue<T> {
       return false
     }
 
-    let node: ListNode<T> | null = null
+    let node: ListNodeBase<T> | null = null
     if (!this.head) {
-      node = new ListNode(value)
+      node = new ListNodeBase(value)
       this.head = node
       this.tail = node
       return true
@@ -33,7 +33,7 @@ export class Queue<T> {
       return false
     }
 
-    node = new ListNode(value)
+    node = new ListNodeBase(value)
     this.tail.next = node
     this.tail = node
     return true

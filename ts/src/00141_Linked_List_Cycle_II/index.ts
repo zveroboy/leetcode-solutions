@@ -1,8 +1,6 @@
 import { ListNode } from '../data/ListNode'
 
-export default function <T = number>(
-  head: ListNode<T> | null,
-): ListNode<T> | null {
+export default function (head: ListNode | null): ListNode | null {
   let runner1 = head
   let runner2 = head
   let iRunner = head

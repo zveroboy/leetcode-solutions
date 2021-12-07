@@ -1,12 +1,10 @@
 import { ListNode } from '../data/ListNode'
 
-export type ReverseLinkedList<T> = (
-  head: ListNode<T> | null,
-) => ListNode<T> | null
+export type ReverseLinkedList = (head: ListNode | null) => ListNode | null
 
-export function defaultSolution<T = number>(
-  head: ListNode<T> | null,
-): ListNode<T> | null {
+export function defaultSolution (
+  head: ListNode | null,
+): ListNode | null {
   let lhead = head
   while (head?.next) {
     const nextHead = head.next
@@ -18,13 +16,13 @@ export function defaultSolution<T = number>(
   return lhead
 }
 
-export function recursionSolution<T = number>(
-  head: ListNode<T> | null,
-): ListNode<T> | null {
+export function recursionSolution (
+  head: ListNode | null,
+): ListNode | null {
   const helper = (
-    head: ListNode<T> | null,
-    node: ListNode<T> | null,
-  ): ListNode<T> | null => {
+    head: ListNode | null,
+    node: ListNode | null,
+  ): ListNode | null => {
     if (!node) {
       return head
     }

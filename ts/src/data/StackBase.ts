@@ -1,11 +1,11 @@
-import { ListNode } from './ListNode'
+import { ListNodeBase } from './ListNode'
 
 export class StackBase<T> {
-  head: ListNode<T> | null = null
-  tail: ListNode<T> | null = null
+  head: ListNodeBase<T> | null = null
+  tail: ListNodeBase<T> | null = null
 
   push(val: T): void {
-    const node = new ListNode(val)
+    const node = new ListNodeBase(val)
     if (this.isEmpty()) {
       this.head = node
       this.tail = node
@@ -17,6 +17,10 @@ export class StackBase<T> {
 
   pop(): void {
     this.head = this.head?.next ?? null
+  }
+
+  top(): T | null {
+    return this.head?.val ?? null
   }
 
   isEmpty(): boolean {

@@ -1,8 +1,6 @@
 import { ListNode } from '../data/ListNode'
 
-export default function swapPairs<T = number>(
-  head: ListNode<T> | null,
-): ListNode<T> | null {
+export default function swapPairs(head: ListNode | null): ListNode | null {
   if (!head?.next) {
     return head
   }
