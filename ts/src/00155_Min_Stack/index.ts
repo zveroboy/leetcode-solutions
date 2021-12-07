@@ -1,43 +1,10 @@
-import { ListNode } from '../data/ListNode'
-
-export abstract class StackBase<T> {
-  head: ListNode<T> | null = null
-  tail: ListNode<T> | null = null
-
-  push(val: T): void {
-    const node = new ListNode(val)
-    if (this.isEmpty()) {
-      this.head = node
-      this.tail = node
-      return
-    }
-    node.next = this.head
-    this.head = node
-  }
-
-  pop(): void {
-    this.head = this.head?.next ?? null
-  }
-
-  isEmpty(): boolean {
-    return !this.head || !this.tail
-  }
-
-  *[Symbol.iterator]() {
-    let node = this.head
-    while (node) {
-      yield node
-      node = node.next
-    }
-  }
-}
+import { StackBase } from '../data/StackBase'
 
 // this simple version has O(n) complexity on getMin
 // export class MinStack extends StackBase<number> {
 //   top(): number {
 //     return this.head?.val ?? -1
 //   }
-
 //   getMin(): number {
 //     return [...this].reduce<number>(
 //       (acc, { val }) => Math.min(acc, val),
