@@ -1,7 +1,6 @@
-import { getSize } from '../data/Matrix'
+import { Coords, getSize, isOutOfBounds } from '../data/Matrix'
 import { Queue } from '../data/Queue'
 
-type Coords = [row: number, col: number]
 const identity = <T>(v: T): T => v
 
 const GATE = 0
@@ -26,11 +25,6 @@ const Move: Record<string, Coords> = Object.freeze({
   RIGHT: [0, 1],
 })
 
-const isOutOfBounds = (mat: number[][], [row, cell]: Coords): boolean => {
-  const [h, w] = getSize(mat)
-  return row < 0 || cell < 0 || row >= h || cell >= w
-}
-
 const matrixValue =
   (mat: number[][]) =>
   ([row, cell]: Coords) =>
@@ -50,7 +44,7 @@ function assignSteps(rooms: number[][], coords: Coords): void {
   const getAdjacent = function* ([row, cell]: Coords): Iterable<Coords> {
     for (const [dy, dx] of Object.values(Move)) {
       const adjCoords: Coords = [row + dy, cell + dx]
-      if (isOutOfBounds(rooms, adjCoords)) {
+      if (isOutOfBounds(w, h, adjCoords)) {
         continue
       }
       if (visited.has(adjCoords + '')) {
