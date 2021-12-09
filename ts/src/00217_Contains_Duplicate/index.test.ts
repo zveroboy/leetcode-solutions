@@ -1,13 +1,13 @@
-import { containsDuplicate } from '.'
+import { containsDuplicate as solution } from '.'
 
-describe(containsDuplicate, () => {
+describe(solution, () => {
   it('case 1', () => {
-    expect(containsDuplicate([1, 2, 3, 1])).toBe(true)
+    expect(solution([1, 2, 3, 1])).toBe(true)
   })
   it('case 2', () => {
-    expect(containsDuplicate([1, 2, 3, 4])).toBe(false)
+    expect(solution([1, 2, 3, 4])).toBe(false)
   })
   it('case 3', () => {
-    expect(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBe(true)
+    expect(solution([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBe(true)
   })
 })
