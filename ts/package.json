@@ -9,10 +9,10 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch --no-cache"
+    "test:watch": "jest --watch --no-cache",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "jest": "^27.3.1",
