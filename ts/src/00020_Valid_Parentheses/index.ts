@@ -1,18 +1,5 @@
 import { StackBase } from '../data/StackBase'
 
-// this simple version has O(n) complexity on getMin
-// export class MinStack extends StackBase<number> {
-//   top(): number {
-//     return this.head?.val ?? -1
-//   }
-//   getMin(): number {
-//     return [...this].reduce<number>(
-//       (acc, { val }) => Math.min(acc, val),
-//       Infinity,
-//     )
-//   }
-// }
-
 const PARENTHESES = '()[]{}'
 
 export default function isValid(s: string): boolean {
