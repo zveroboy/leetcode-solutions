@@ -7,10 +7,15 @@
 //   }
 // }
 
-export const martixGen = function * ([x1, y1]: [x1: number, y1: number], [x2, y2]: [x2: number, y2: number]): IterableIterator<number[]> {
+import { Coords } from './Matrix'
+
+export const martixGen = function* (
+  [x1, y1]: [x1: number, y1: number],
+  [x2, y2]: [x2: number, y2: number],
+): Generator<Coords> {
   for (let i = 0; i < y2 - y1; i++) {
     for (let j = 0; j < x2 - x1; j++) {
-      yield [j, i]
+      yield [i, j]
     }
   }
 }
