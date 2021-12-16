@@ -8,21 +8,21 @@ export class TreeNode {
 
 export const fromArray = (values: (number | null)[]): TreeNode | null => {
   const first = values[0]
-  if (!first) {
+  if (first == null) {
     return null
   }
 
   const len = Math.log2(values.length + 1)
   let lim = 0
   const helper = (i: number, level: number) => {
-    if (++lim > 10) {
+    if (++lim > 100) {
       throw new Error('Too much')
     }
     const levelStart = 2 ** level - 1
     const nextLevelStart = 2 ** (level + 1) - 1
     const levelValues = values.slice(levelStart, nextLevelStart)
     const value = levelValues[i]
-    if (!value) {
+    if (value == null) {
       return null
     }
     const tree = new TreeNode(value)
