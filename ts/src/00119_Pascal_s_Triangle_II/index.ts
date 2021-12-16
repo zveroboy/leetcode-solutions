@@ -1,8 +1,8 @@
-const sum = function* (inp: number[]): Iterable<number> {
+const sum = function* (inp: number[]): Generator<number> {
   for (let i = 1; i < inp.length; i++) yield inp[i - 1] + inp[i]
 }
 
-export default function getRow(rowIndex: number): number[] {
+export function getRow(rowIndex: number): number[] {
   if (rowIndex === 0) {
     return [1]
   } else {
