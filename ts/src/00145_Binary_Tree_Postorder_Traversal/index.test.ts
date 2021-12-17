@@ -1,7 +1,7 @@
 import { TreeNode } from '../data/TreeNode'
-import solution from '.'
+import { postorderTraversal as solution } from '.'
 
-describe('should solve', () => {
+describe(solution, () => {
   it('case [1,null,2,3]', () => {
     const root = new TreeNode(1, null, new TreeNode(2, new TreeNode(3)))
     expect(solution(root)).toEqual([3, 2, 1])
