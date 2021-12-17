@@ -1,7 +1,7 @@
-import { Coords, range } from '../data/Matrix'
+import { Coord, range } from '../data/Matrix'
 
 interface SudokuSubArray {
-  (i: number): Generator<Coords, void, void>
+  (i: number): Generator<Coord, void, void>
 }
 
 const SUDOKU = Object.freeze({

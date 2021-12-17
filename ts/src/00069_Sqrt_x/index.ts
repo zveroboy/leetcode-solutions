@@ -1,5 +1,5 @@
 import { binarySearch } from '../data/BinarySearch'
-import { Coords } from '../data/Matrix'
+import { Coord } from '../data/Matrix'
 import { martixGen } from '../data/Coords'
 
 const koef = 1e8

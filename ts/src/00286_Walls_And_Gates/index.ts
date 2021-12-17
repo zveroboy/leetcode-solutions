@@ -1,49 +1,30 @@
-import { Coords, getSize, isOutOfBounds } from '../data/Matrix'
+import { Coord, getSize, isOutOfBounds, traverseMatrix } from '../data/Matrix'
+import { Move } from '../data/Coords'
 import { Queue } from '../data/Queue'
-
-const identity = <T>(v: T): T => v
+import { identity } from '../utils/identity'
 
 const GATE = 0
 const WALL = -1
 
-function* traverseMatrix<T>(
-  mat: number[][],
-  fn: (coords: Coords) => T,
-): Iterable<T> {
-  const [h, w] = getSize(mat)
-  for (let row = 0; row < h; row++) {
-    for (let cell = 0; cell < w; cell++) {
-      yield fn([row, cell])
-    }
-  }
-}
-
-const Move: Record<string, Coords> = Object.freeze({
-  UP: [-1, 0],
-  DOWN: [1, 0],
-  LEFT: [0, -1],
-  RIGHT: [0, 1],
-})
-
 const matrixValue =
   (mat: number[][]) =>
-  ([row, cell]: Coords) =>
+  ([row, cell]: Coord) =>
     mat[row][cell]
 const isGate = (v: number): boolean => v === GATE
 const isWall = (v: number): boolean => v === WALL
 
-function assignSteps(rooms: number[][], coords: Coords): void {
+function assignSteps(rooms: number[][], coords: Coord): void {
   const [h, w] = getSize(rooms)
   const getMatrixValue = matrixValue(rooms)
   const visited = new Set<string>()
-  const queue = new Queue<Coords>(w * h)
+  const queue = new Queue<Coord>(w * h)
   let step = 0
   queue.enQueue(coords)
   visited.add(coords + '')
 
-  const getAdjacent = function* ([row, cell]: Coords): Iterable<Coords> {
+  const getAdjacent = function* ([row, cell]: Coord): Iterable<Coord> {
     for (const [dy, dx] of Object.values(Move)) {
-      const adjCoords: Coords = [row + dy, cell + dx]
+      const adjCoords: Coord = [row + dy, cell + dx]
       if (isOutOfBounds(w, h, adjCoords)) {
         continue
       }

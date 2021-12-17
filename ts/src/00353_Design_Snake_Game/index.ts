@@ -1,28 +1,29 @@
-import { add, compare, Coords, isOutOfBounds } from '../data/Matrix'
+import { Move } from '../data/Coords'
+import { add, compare, Coord, isOutOfBounds } from '../data/Matrix'
 
-const DIRECTIONS: Record<string, Coords> = Object.freeze({
-  U: [-1, 0],
-  D: [1, 0],
-  L: [0, -1],
-  R: [0, 1],
+const DIRECTIONS: Record<string, Coord> = Object.freeze({
+  U: Move.UP,
+  D: Move.DOWN,
+  L: Move.LEFT,
+  R: Move.RIGHT,
 })
 
 class Snake {
-  constructor(public body: Coords[]) {}
-  get headCoords(): Coords {
+  constructor(public body: Coord[]) {}
+  get headCoords(): Coord {
     return this.body[this.body.length - 1]
   }
   get size(): number {
     return this.body.length - 1
   }
-  eate(coords: Coords): void {
+  eate(coords: Coord): void {
     this.body.push(coords)
   }
-  move(coords: Coords): void {
+  move(coords: Coord): void {
     this.body.shift()
     this.body.push(coords)
   }
-  checkCollision(coords: Coords): boolean {
+  checkCollision(coords: Coord): boolean {
     return this.body.slice(1).some((cur) => compare(cur, coords))
   }
   *[Symbol.iterator]() {
@@ -41,7 +42,7 @@ export class SnakeGame {
     this.snake = new Snake([[0, 0]])
   }
 
-  get curFoodCoords(): Coords | undefined {
+  get curFoodCoords(): Coord | undefined {
     const curFoodCoords = this.food[this.foodIdx]
     return curFoodCoords && [curFoodCoords[0], curFoodCoords[1]]
   }
