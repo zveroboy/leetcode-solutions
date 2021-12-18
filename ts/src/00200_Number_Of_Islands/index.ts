@@ -28,15 +28,15 @@ const getAdjacentCoords = (coords: Coord): Coord[] => {
   }, [])
 }
 
-const triverse = function* <T>(initial: T): Generator<T, void, T[]> {
-  const queue: T[] = [initial]
-  while (queue.length) {
-    const adjacents = yield queue[0]
-
-    adjacents.forEach((item) => queue.push(item))
-    queue.shift()
+const traverse =
+  <T>(getAdjacentsFn: (item: T) => T[]) =>
+  (initial: T) => {
+    const queue: T[] = [initial]
+    while (queue.length) {
+      getAdjacentsFn(queue[0]).forEach((item) => queue.push(item))
+      queue.shift()
+    }
   }
-}
 
 export function numIslands(grid: string[][]): number {
   let result = 0
@@ -51,6 +51,7 @@ export function numIslands(grid: string[][]): number {
   const { checkVisited, visit } = createVisited()
 
   const getAdjacents = (coord: Coord) => {
+    visit(coord + '')
     return getAdjacentCoords(coord)
       .filter((coord) => !isOutOfBounds(width, height, coord))
       .filter((coord) => !checkVisited(coord + ''))
@@ -61,14 +62,7 @@ export function numIslands(grid: string[][]): number {
       })
   }
 
-  const traverseIsland = (initCoord: Coord) => {
-    const gen = triverse(initCoord)
-    let coord = gen.next().value
-    while (coord) {
-      visit(coord + '')
-      coord = gen.next(getAdjacents(coord)).value
-    }
-  }
+  const traverseIsland = traverse(getAdjacents)
 
   for (const coord of traverseMatrix(grid, identity)) {
     if (!checkIsLand(coord)) {
