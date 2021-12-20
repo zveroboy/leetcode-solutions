@@ -5,9 +5,10 @@ export function fib(n: number): number {
       return n
     }
 
-    const result = helper(n - 1) + helper(n - 2)
-    memo[n] = result
-    return result
+    memo[n - 1] ??= helper(n - 1)
+    memo[n - 2] ??= helper(n - 2)
+
+    return memo[n - 1] + memo[n - 2]
   }
   return helper(n)
 }
