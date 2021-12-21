@@ -11,6 +11,6 @@ describe(solution, () => {
     expect<number>(solution(4)).toEqual<number>(5)
   })
   it('case 35', () => {
-    expect<number>(solution(35)).toEqual<number>(8)
+    expect<number>(solution(35)).toEqual<number>(14930352)
   })
 })

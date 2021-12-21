@@ -29,7 +29,6 @@ export function evalRPN(tokens: string[]): number {
       }
 
       const operation = OPERATOR_FUNC[ch]
-      console.log(operand1, ch, operand2)
       stack.push(operation(operand1, operand2))
       continue
     }
