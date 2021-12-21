@@ -1,6 +1,4 @@
-import { binarySearch } from '../data/BinarySearch'
-import { Coord } from '../data/Matrix'
-import { martixGen } from '../data/Coords'
+import { binarySearch, Predicate } from '../data/BinarySearch'
 
 const koef = 1e8
 
@@ -13,22 +11,14 @@ export function mySqrt(x: number): number {
   }
 
   const prec = x * koef
-  let from = 0
-  let to = prec
 
-  while (1 + from < to) {
-    const mid = from + Math.floor((to - from) / 2)
+  const predicate: Predicate = (_, mid) => mid * mid > prec * koef
 
+  for (const mid of binarySearch(prec, predicate)) {
     const temp = mid * mid
 
     if (Math.abs(x * koef ** 2 - temp) / koef ** 2 < 1e-2) {
       return Math.floor(mid / koef)
-    }
-
-    if (temp > prec * koef) {
-      to = mid
-    } else {
-      from = mid
     }
   }
 

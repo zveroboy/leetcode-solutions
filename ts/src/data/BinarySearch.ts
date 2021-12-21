@@ -1,20 +1,21 @@
-export type Predicate<T> = (item: T) => boolean
+export type Predicate = (from: number, mid: number, to: number) => boolean
 
-export const binarySearch = function* <T>(
-  array: T[],
-  pred: Predicate<T>,
+export const binarySearch = function* (
+  max: number,
+  pred: Predicate,
 ): Generator<number> {
-  let from = -1,
-    to = array.length
-  while (1 + from < to) {
-    const mid = from + ((to - from) >> 1)
+  if (max < 1) return
+  let from = 0,
+    to = max
+  while (from <= to) {
+    const mid = from + Math.floor((to - from) / 2)
 
     yield mid
 
-    if (pred(array[mid])) {
-      to = mid
+    if (pred(from, mid, to)) {
+      to = mid - 1
     } else {
-      from = mid
+      from = mid + 1
     }
   }
 }

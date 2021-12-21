@@ -1,9 +1,9 @@
-import { binarySearch } from '../data/BinarySearch'
+import { binarySearch, Predicate } from '../data/BinarySearch'
 
 // Generator solition
 export function search(nums: number[], target: number): number {
-  const predicate = (num: number): boolean => num > target
-  for (const mid of binarySearch(nums, predicate)) {
+  const predicate: Predicate = (_, mid: number): boolean => nums[mid] > target
+  for (const mid of binarySearch(nums.length - 1, predicate)) {
     const num = nums[mid]
     if (num === target) {
       return mid
