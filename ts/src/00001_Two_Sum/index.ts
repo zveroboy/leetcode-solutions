@@ -1,4 +1,4 @@
-export default function (input: number[], target: number): [number, number] {
+export function twoSum(input: number[], target: number): [number, number] {
   const map: Record<number, string> = {}
 
   for (const i in input) {
