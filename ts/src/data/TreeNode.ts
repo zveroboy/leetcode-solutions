@@ -36,3 +36,28 @@ export const fromArray = (values: (number | null)[]): TreeNode | null => {
 
   return helper(0, 0)
 }
+
+export const toArray = (root: TreeNode | null): (number | null)[] => {
+  const result: (number | null)[] = [root?.val ?? null]
+  const helper = (acc: (number | null)[] = [], root: TreeNode | null) => {
+    if (!root) {
+      return
+    }
+    const { left, right } = root
+    result.push(left?.val ?? null)
+    result.push(right?.val ?? null)
+    helper(acc, left)
+    helper(acc, right)
+  }
+
+  helper(result, root)
+
+  for (let i = result.length - 1; i >= 0; i--) {
+    if (result[i] != null) {
+      break
+    }
+    result.splice(i, 1)
+  }
+
+  return result
+}
