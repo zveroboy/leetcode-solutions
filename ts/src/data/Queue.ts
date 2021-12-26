@@ -1,5 +1,31 @@
 import { ListNodeBase } from './ListNode'
 
+export interface IQueue<T> {
+  isEmpty(): boolean
+  enqueue(item: T): void
+  dequeue(): T | undefined
+  head(): T | undefined
+}
+
+export class ArrayQueue<T> implements IQueue<T> {
+  private queue: T[] = []
+  isEmpty() {
+    return this.queue.length === 0
+  }
+  enqueue(item: T) {
+    this.queue.push(item)
+  }
+  dequeue() {
+    return this.queue.shift()
+  }
+  head() {
+    return this.queue[0]
+  }
+  *[Symbol.iterator]() {
+    yield* this.queue
+  }
+}
+
 export class Queue<T> {
   public limit
   head: ListNodeBase<T> | null = null

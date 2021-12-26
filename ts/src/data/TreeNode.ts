@@ -1,3 +1,5 @@
+import { ArrayQueue } from './Queue'
+
 export class TreeNode {
   constructor(
     public val: number = 0,
@@ -6,7 +8,7 @@ export class TreeNode {
   ) {}
 }
 
-export const fromArray = (values: (number | null)[]): TreeNode | null => {
+export const fromArray_ = (values: (number | null)[]): TreeNode | null => {
   const first = values[0]
   if (first == null) {
     return null
@@ -37,26 +39,57 @@ export const fromArray = (values: (number | null)[]): TreeNode | null => {
   return helper(0, 0)
 }
 
-export const toArray = (root: TreeNode | null): (number | null)[] => {
-  const result: (number | null)[] = [root?.val ?? null]
-  const helper = (acc: (number | null)[] = [], root: TreeNode | null) => {
-    if (!root) {
-      return
+const createTreeFactory =
+  (valuesItr: Iterator<number | null>) => (): TreeNode | null => {
+    const valueResult = valuesItr.next()
+    if (valueResult.done) {
+      return null
     }
-    const { left, right } = root
-    result.push(left?.val ?? null)
-    result.push(right?.val ?? null)
-    helper(acc, left)
-    helper(acc, right)
+    if (valueResult.value == null) {
+      return null
+    }
+    return new TreeNode(valueResult.value)
   }
 
-  helper(result, root)
+export const fromArray = (values: (number | null)[]): TreeNode | null => {
+  const createTree = createTreeFactory(values[Symbol.iterator]())
+  const root = createTree()
+  if (values.length === 0 || !root) {
+    return null
+  }
+  const queue = new ArrayQueue<TreeNode>()
+  queue.enqueue(root)
 
-  for (let i = result.length - 1; i >= 0; i--) {
-    if (result[i] != null) {
-      break
-    }
-    result.splice(i, 1)
+  while (!queue.isEmpty()) {
+    const tree = queue.dequeue()
+    if (!tree) throw new Error('wrong structure')
+    tree.left = createTree()
+    tree.right = createTree()
+    if (tree.left) queue.enqueue(tree.left)
+    if (tree.right) queue.enqueue(tree.right)
+  }
+
+  return root
+}
+
+export const toArray = (root: TreeNode | null): (number | null)[] => {
+  const result: (number | null)[] = [root?.val ?? null]
+  const queue = new ArrayQueue<TreeNode>()
+  if (root) {
+    queue.enqueue(root)
+  }
+
+  while (!queue.isEmpty()) {
+    const tree = queue.dequeue()
+    if (!tree) throw new Error('wrong structure')
+    result.push(tree.left?.val ?? null)
+    result.push(tree.right?.val ?? null)
+    if (tree.left) queue.enqueue(tree.left)
+    if (tree.right) queue.enqueue(tree.right)
+  }
+
+  while (result.length > 0 && result[result.length - 1] == null) {
+    result.pop()
   }
 
   return result
