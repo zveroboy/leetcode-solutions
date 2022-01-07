@@ -1,11 +1,5 @@
+import { bfs } from 'data/Search'
 import { TreeNode } from '../data/TreeNode'
-
-interface Queue<T> {
-  isEmpty(): boolean
-  enqueue(item: T): void
-  dequeue(): T | undefined
-  head(): T | undefined
-}
 
 type QueueItem = { tree: TreeNode; inorder: number[] }
 
@@ -33,22 +27,6 @@ const createTreeFiller = (getNextTree: () => TreeNode) => {
   }
 }
 
-class TreeQueue implements Queue<QueueItem> {
-  queue: QueueItem[] = []
-  isEmpty() {
-    return this.queue.length > 0
-  }
-  enqueue(item: QueueItem) {
-    this.queue.push(item)
-  }
-  dequeue(): QueueItem | undefined {
-    return this.queue.shift()
-  }
-  head(): QueueItem | undefined {
-    return this.queue[0]
-  }
-}
-
 const createTreeFactory = (preorderItr: Iterator<number>) => (): TreeNode => {
   const preorderResult = preorderItr.next()
   if (preorderResult.done) {
@@ -66,18 +44,12 @@ export function buildTree(
 ): TreeNode | null {
   const createTree = createTreeFactory(preorder[Symbol.iterator]())
   const root = createTree()
-  const queue = new TreeQueue()
+
   const fillTree = createTreeFiller(createTree)
-
-  queue.enqueue({ tree: root, inorder })
-  while (queue.isEmpty()) {
-    const item = queue.dequeue()
-    if (item == null) throw new Error('Queue item is empty')
-
-    for (const newItem of fillTree(item)) {
-      queue.enqueue(newItem)
-    }
-  }
+  const run = bfs<QueueItem>(function* (item) {
+    yield* fillTree(item)
+  })
+  run({ tree: root, inorder })
 
   return root
 }

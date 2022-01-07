@@ -66,7 +66,7 @@ export default function wallsAndGates(rooms: number[][]): void {
 
   const getMatrixValue = matrixValue(rooms)
 
-  for (const coords of traverseMatrix(rooms, identity)) {
+  for (const coords of traverseMatrix(identity)(rooms)) {
     const value = getMatrixValue(coords)
     if (isGate(value)) {
       assignSteps(rooms, coords)

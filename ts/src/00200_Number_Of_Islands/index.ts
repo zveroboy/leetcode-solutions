@@ -64,7 +64,7 @@ export function numIslands(grid: string[][]): number {
 
   const traverseIsland = traverse(getAdjacents)
 
-  for (const coord of traverseMatrix(grid, identity)) {
+  for (const coord of traverseMatrix(identity)(grid)) {
     if (!checkIsLand(coord)) {
       continue
     }
