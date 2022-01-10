@@ -9,7 +9,14 @@
 
 import { Coord } from './Matrix'
 
-export const Move: Record<string, Coord> = Object.freeze({
+export enum Dir {
+  UP = 'UP',
+  DOWN = 'DOWN',
+  LEFT = 'LEFT',
+  RIGHT = 'RIGHT'
+}
+
+export const Move: Record<Dir, Coord> = Object.freeze({
   UP: [-1, 0],
   DOWN: [1, 0],
   LEFT: [0, -1],
