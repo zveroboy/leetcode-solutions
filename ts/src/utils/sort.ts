@@ -9,19 +9,34 @@ export const insertionSort = (arr: number[]): number[] => {
   return arr
 }
 
-export const bubbleSort = (arr: number[]): number[] => {
+export const bubbleSortOld = (arr: number[]): number[] => {
   const len = arr.length
   let isSorted = len < 2
   let s = 0
   while (!isSorted) {
     isSorted = true
-    for (let m = 1; m < len - s; m++ ) {
+    for (let m = 1; m < len - s; m++) {
       if (arr[m] < arr[m - 1]) {
         isSorted = false
         ;[arr[m - 1], arr[m]] = [arr[m], arr[m - 1]]
       }
     }
     s++
+  }
+
+  return arr
+}
+
+export const bubbleSort = (arr: number[]): number[] => {
+  for (let s = arr.length; s > 0; s--) {
+    let isSorted = true
+    for (let m = 1; m < s; m++) {
+      if (arr[m] < arr[m - 1]) {
+        isSorted = false
+        ;[arr[m - 1], arr[m]] = [arr[m], arr[m - 1]]
+      }
+    }
+    if (isSorted) break
   }
 
   return arr
