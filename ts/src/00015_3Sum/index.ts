@@ -29,8 +29,6 @@ export function threeSum(nums: number[]): number[][] {
         break
       }
 
-      if (++lim > 100) throw new Error('too much')
-
       const comb = [c, l, r].map((i) => sorted[i])
       const sum = comb.reduce((a, b) => a + b)
 

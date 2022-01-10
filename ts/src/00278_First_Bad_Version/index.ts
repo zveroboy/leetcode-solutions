@@ -15,7 +15,6 @@ const solution = function (isBadVersion: any) {
     for (const mid of binarySearch(n, (_, mid) => memoizedIsBadVersion(mid))) {
       i++
       if (memoizedIsBadVersion(mid) && !memoizedIsBadVersion(mid - 1)) {
-        console.log({ i })
         return mid
       }
     }

@@ -20,7 +20,6 @@ export function findMin(nums: number[]): number {
     const left = nums[from]
     const num = nums[mid]
     const right = nums[to] ?? nums[to - 1]
-    console.log({ left, num, right })
     return left < right || num < left
   }
 

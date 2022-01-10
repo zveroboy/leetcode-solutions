@@ -12,6 +12,7 @@ export function inorderSuccessor(
     return inorderSuccessor(root?.right, p)
   }
 
-  if (p.val < root.val) {
-  }
+  // if (p.val < root.val) {
+  // }
+  return null
 }
