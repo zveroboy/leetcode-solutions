@@ -1,7 +1,7 @@
-/// @number 1
-/// @title Two Sum
-/// @url https://leetcode.com/problems/two-sum
-/// @difficulty easy
+/// @number 50
+/// @title Pow(x, n)
+/// @url https://leetcode.com/problems/powx-n/
+/// @difficulty medium
 
 struct Solution;
 
