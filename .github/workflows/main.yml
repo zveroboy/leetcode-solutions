@@ -52,7 +52,7 @@ jobs:
         working-directory: ./ts
     steps:
       - name: Checkout sources
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Install node modules
         run: yarn
