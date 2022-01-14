@@ -43,7 +43,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          args: -- --manifest-path rust/leetcode-tasks/Cargo.toml
+          args: --manifest-path rust/leetcode-tasks/Cargo.toml
 
 #   ts_test:
 #     name: Typesctipt Test Suite
