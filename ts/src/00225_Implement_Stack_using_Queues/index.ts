@@ -1,3 +1,4 @@
+import { assertIsFinite } from '../utils/assertations'
 import { ListNodeBase } from '../data/ListNode'
 
 class Queue<T> {
@@ -41,21 +42,6 @@ class Queue<T> {
       yield node.val
       node = node.next
     }
-  }
-}
-
-class InfiniteOpError extends Error {
-  constructor() {
-    super('Infinite op')
-    this.name = 'InfiniteError'
-  }
-}
-
-let lim = 100
-
-const assertIsFinite = () => {
-  if (--lim < 0) {
-    throw new InfiniteOpError()
   }
 }
 
