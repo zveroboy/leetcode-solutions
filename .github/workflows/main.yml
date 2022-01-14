@@ -40,7 +40,7 @@ jobs:
           override: true
           
       - name: Check path
-        run: echo "pwd" && pwd
+        run: ls -la
 
       - name: Run cargo test
         uses: actions-rs/cargo@v1
