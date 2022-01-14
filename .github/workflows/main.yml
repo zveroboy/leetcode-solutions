@@ -6,35 +6,56 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Log level'     
+        description: 'Log level'
         required: true
         default: 'warning'
       tags:
-        description: 'Test scenario tags'  
+        description: 'Test scenario tags'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  rs_test:
+    name: Rust Test Suite
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./rust/leetcode-tasks
+    steps:
+      - name: Checkout sources
+      - uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Run cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+
+  ts_test:
+    name: Typesctipt Test Suite
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./ts
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout sources
       - uses: actions/checkout@v2
-      # Runs a single command using the runners shell
-      - name: Install modules
+
+      - name: Install node modules
         run: yarn
-      - name: Run tests
+
+      - name: Run Typescript solutions tests
         run: yarn test
