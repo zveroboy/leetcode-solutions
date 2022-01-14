@@ -38,14 +38,11 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          
-      - name: Check path
-        run: ls -la
 
       - name: Run cargo test
         uses: actions-rs/cargo@v1
         with:
-          command: test -- --manifest-path rust/leetcode-tasks/Cargo.toml
+          command: test --manifest-path rust/leetcode-tasks/Cargo.toml
 
 #   ts_test:
 #     name: Typesctipt Test Suite
