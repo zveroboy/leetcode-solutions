@@ -38,24 +38,27 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+          
+      - name: Check path
+        run: echo "pwd" && pwd
 
       - name: Run cargo test
         uses: actions-rs/cargo@v1
         with:
           command: test
 
-  ts_test:
-    name: Typesctipt Test Suite
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ts
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v2
+#   ts_test:
+#     name: Typesctipt Test Suite
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: ./ts
+#     steps:
+#       - name: Checkout sources
+#         uses: actions/checkout@v2
 
-      - name: Install node modules
-        run: yarn
+#       - name: Install node modules
+#         run: yarn
 
-      - name: Run Typescript solutions tests
-        run: yarn test
+#       - name: Run Typescript solutions tests
+#         run: yarn test
