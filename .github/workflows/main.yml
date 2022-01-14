@@ -45,18 +45,18 @@ jobs:
           command: test
           args: --manifest-path rust/leetcode-tasks/Cargo.toml
 
-#   ts_test:
-#     name: Typesctipt Test Suite
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         working-directory: ./ts
-#     steps:
-#       - name: Checkout sources
-#         uses: actions/checkout@v2
+  ts_test:
+    name: Typesctipt Test Suite
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ts
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
 
-#       - name: Install node modules
-#         run: yarn
+      - name: Install node modules
+        run: yarn
 
-#       - name: Run Typescript solutions tests
-#         run: yarn test
+      - name: Run Typescript solutions tests
+        run: yarn test
