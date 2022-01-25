@@ -1,5 +1,12 @@
 type Sort = (arr: number[]) => number[]
 
+export const shuffle = <T>(arr: T[]): void => {
+  for (const i in arr) {
+    const randIdx = Math.floor(Math.random() * (arr.length - +i)) + +i
+    ;[arr[randIdx], arr[i]] = [arr[i], arr[randIdx]]
+  }
+}
+
 const swap = <T>(arr: T[], i: number, j: number): void => {
   if (i !== j) {
     ;[arr[i], arr[j]] = [arr[j], arr[i]]
@@ -42,13 +49,6 @@ export const selectionSort: Sort = (arr) => {
     if (i != min) swap(arr, i, min)
   }
   return arr
-}
-
-export const shuffle = <T>(arr: T[]): void => {
-  for (const i in arr) {
-    const randIdx = Math.floor(Math.random() * (arr.length - +i)) + +i
-    ;[arr[randIdx], arr[i]] = [arr[i], arr[randIdx]]
-  }
 }
 
 export const mergeLoop = (arr1: number[], arr2: number[]): number[] => {
