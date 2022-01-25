@@ -21,8 +21,8 @@ impl Solution {
         }
 
         match n {
-            d if d > 0 => hepler(x, n),
-            d if d < 0 => 1.0 / hepler(x, n),
+            n if n > 0 => hepler(x, n),
+            n if n < 0 => 1.0 / hepler(x, n),
             _ => 1.0
         } 
     }
@@ -30,7 +30,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::s_00050_pow_x_n::pow_x_n::Solution;
+    use super::Solution;
 
     #[test]
     fn my_pow_works() {

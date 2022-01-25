@@ -11,12 +11,13 @@ impl Solution {
     pub fn two_sum (input: Vec<i32>, target: i32) -> [i32; 2] {
         let mut map: HashMap<i32, usize> = HashMap::new();
 
-        for (i, v) in input.iter().enumerate() {
-            let pair = target - v;
-            if map.contains_key(&pair) {
-                return [*map.get(&pair).unwrap() as i32, i as i32];
+        for (i, &v) in input.iter().enumerate() {
+            let pair = &(target - v);
+            if map.contains_key(pair) {
+                let &result = map.get(pair).unwrap();
+                return [result as i32, i as i32];
             }
-            map.insert(*v, i);
+            map.insert(v, i);
         }
 
         panic!("out of task conditions");
@@ -25,7 +26,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::s_00001_two_sum::two_sum::Solution;
+    use super::Solution;
 
     #[test]
     fn two_sum_works() {

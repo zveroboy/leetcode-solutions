@@ -13,7 +13,7 @@ impl Solution {
             panic!("The number is out of bounds")
         }
 
-        let mut letters = vec!["I", "V", "X", "L", "C", "D", "M"];
+        let mut letters = vec!['I', 'V', 'X', 'L', 'C', 'D', 'M'];
         letters.reverse();
         let mut dividers = vec![1, 5, 10, 50, 100, 500, 1000];
         dividers.reverse();
@@ -21,7 +21,7 @@ impl Solution {
         let mut number = num as usize;
         let mut acc = String::new();
 
-        for (i, divider) in dividers.into_iter().enumerate() {
+        for (i, divider) in dividers.iter().enumerate() {
             if i % 2 != 0 {
                 continue;
             }
@@ -32,7 +32,7 @@ impl Solution {
             let one = letters[i];
 
             if digit < 4 {
-                acc.push_str(&*one.repeat(digit));
+                acc.push_str(&one.to_string().repeat(digit));
                 continue;
             }
 
@@ -40,14 +40,14 @@ impl Solution {
             let ten = letters[i - 2];
 
             if digit == 4 {
-                acc.push_str(one);
-                acc.push_str(five);
+                acc.push(one);
+                acc.push(five);
             } else if digit == 9 {
-                acc.push_str(one);
-                acc.push_str(ten);
+                acc.push(one);
+                acc.push(ten);
             } else {
-                acc.push_str(five);
-                acc.push_str(&*one.repeat(digit % 5));
+                acc.push(five);
+                acc.push_str(&one.to_string().repeat(digit % 5));
             }
         }
 
@@ -57,7 +57,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::s_00012_integer_to_roman::integer_to_roman::Solution;
+    use super::Solution;
 
     #[test]
     fn integer_to_roman_works() {
