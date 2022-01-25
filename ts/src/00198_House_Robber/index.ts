@@ -1,45 +1,13 @@
-import { assertIsFinite } from '../utils/assertations'
-
-const merge = function* (a: number[], b: number[]): Generator<number> {
-  const aIt = a.values()
-  const bIt = b.values()
-
-  for (let aRes = aIt.next(), bRes = bIt.next(); !aRes.done || !bRes.done; ) {
-    if (bRes.done || aRes.value <= bRes.value) {
-      yield aRes.value
-      aRes = aIt.next()
-      continue
-    } else if (aRes.done || aRes.value > bRes.value) {
-      yield bRes.value
-      bRes = bIt.next()
-      continue
-    }
-    throw new Error('Something went wrong')
+export function rob(nums: number[]): number {
+  const memo: number[] = []
+  const helper = (i: number) => {
+    if (i === 0) return (memo[i] = nums[i])
+    if (i === 1) return Math.max(memo[i - 1], nums[i])
+    return Math.max(memo[i - 1], memo[i - 2] + nums[i])
   }
-}
-
-export function sortArrayRec(nums: number[]): number[] {
-  const len = nums.length
-  if (len < 2) {
-    return nums
+  for (let i = 0; i < nums.length; i++) {
+    memo[i] = helper(i)
   }
 
-  const mid = len >> 1
-  const a = sortArray(nums.slice(0, mid))
-  const b = sortArray(nums.slice(mid))
-  return [...merge(a, b)]
-}
-
-export function sortArray(nums: number[]): number[] {
-  const queue: number[][] = nums.map((a) => [a])
-  while (queue.length > 1) {
-    assertIsFinite()
-    const a = queue.shift()
-    const b = queue.shift()
-    if (!a || !b) throw new Error('Something went wrong')
-
-    queue.push([...merge(a, b)])
-  }
-
-  return queue.shift() ?? []
+  return memo[memo.length - 1]
 }
