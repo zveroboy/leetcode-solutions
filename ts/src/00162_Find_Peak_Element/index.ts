@@ -6,7 +6,7 @@ export function findPeakElement(nums: number[]): number {
     return 0
   }
 
-  const getNeibours = (idx: number) => {
+  const getNeighbors = (idx: number) => {
     const left = nums[idx - 1] ?? -Infinity
     const right = nums[idx + 1] ?? -Infinity
     return [left, right]
@@ -14,13 +14,15 @@ export function findPeakElement(nums: number[]): number {
 
   const predicate: Predicate = (_, mid) => {
     const num = nums[mid]
-    const [, right] = getNeibours(mid)
+    const [, right] = getNeighbors(mid)
     return num > right
   }
 
-  for (const mid of binarySearchLeftRight(len, predicate)) {
+  const bs = binarySearchLeftRight(predicate)
+
+  for (const mid of bs(len)) {
     const num = nums[mid]
-    const [left, right] = getNeibours(mid)
+    const [left, right] = getNeighbors(mid)
     if (left < num && num > right) {
       return mid
     }

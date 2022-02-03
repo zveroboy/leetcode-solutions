@@ -1,4 +1,4 @@
-export function rob(nums: number[]): number {
+export function robTab(nums: number[]): number {
   const memo: number[] = []
   const helper = (i: number) => {
     if (i === 0) return (memo[i] = nums[i])
@@ -10,4 +10,15 @@ export function rob(nums: number[]): number {
   }
 
   return memo[memo.length - 1]
+}
+
+export function rob(nums: number[]): number {
+  const memo: number[] = [nums[0]]
+
+  const compareParts = (i: number): [number, number] =>
+    i === 1 ? [nums[0], nums[1]] : [helper(i - 1), helper(i - 2) + nums[i]]
+
+  const helper = (i: number) => (memo[i] ??= Math.max(...compareParts(i)))
+
+  return helper(nums.length - 1)
 }
