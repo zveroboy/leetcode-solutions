@@ -2,13 +2,12 @@
 /// @title Two Sum
 /// @url https://leetcode.com/problems/two-sum
 /// @difficulty easy
-
 use std::collections::HashMap;
 
 struct Solution;
 
 impl Solution {
-    pub fn two_sum (input: Vec<i32>, target: i32) -> [i32; 2] {
+    pub fn two_sum(input: Vec<i32>, target: i32) -> [i32; 2] {
         let mut map: HashMap<i32, usize> = HashMap::new();
 
         for (i, &v) in input.iter().enumerate() {

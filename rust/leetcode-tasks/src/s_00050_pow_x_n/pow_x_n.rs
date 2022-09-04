@@ -6,8 +6,8 @@
 struct Solution;
 
 impl Solution {
-    pub fn my_pow (x: f64, n: i32) -> f64 {
-        fn hepler (x: f64, n: i32) -> f64 {
+    pub fn my_pow(x: f64, n: i32) -> f64 {
+        fn hepler(x: f64, n: i32) -> f64 {
             match n {
                 0 => 1.0,
                 1 => x,
@@ -23,8 +23,8 @@ impl Solution {
         match n {
             n if n > 0 => hepler(x, n),
             n if n < 0 => 1.0 / hepler(x, n),
-            _ => 1.0
-        } 
+            _ => 1.0,
+        }
     }
 }
 
