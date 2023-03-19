@@ -5,8 +5,6 @@
 
 struct Solution;
 
-// const
-
 impl Solution {
     pub fn integer_to_roman(num: i32) -> String {
         if 1 > num || num > 3999 {
